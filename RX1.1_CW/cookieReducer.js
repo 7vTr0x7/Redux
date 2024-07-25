@@ -4,7 +4,7 @@ const cookieReducer = (state = initialState, action) => {
   switch (action.type) {
     case "cookies/added":
       return { value: state.value + 1 };
-    case "cookies/remove":
+    case "cookies/removed":
       return { value: state.value - 1 };
     default:
       return state;
