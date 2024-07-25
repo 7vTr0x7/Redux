@@ -25,6 +25,10 @@ main {
   align-items: center;
 }
 
+button {
+  margin: 5px;
+}
+
 .title {
   margin: 0;
   line-height: 1.15;
