@@ -1,11 +1,10 @@
 import { createStore } from "https://cdn.skypack.dev/redux";
 import todoReducer from "./todoReducer.js";
-import { addTodo } from "./action.js";
+import { addTodo, removeTodo } from "./action.js";
 
 const store = createStore(todoReducer);
 
 store.subscribe(() => {
-  console.log(store.getState());
   updateTodoList();
 });
 
@@ -22,11 +21,15 @@ const addTodoHandler = () => {
 
 addTodoBtn.addEventListener("click", addTodoHandler);
 
+window.removeTodo = (index) => {
+  store.dispatch(removeTodo(index));
+};
+
 const updateTodoList = () => {
   const state = store.getState();
   todoList.innerHTML = state.todos
     .map((todo, index) => {
-      return `<li key={${index}}>${todo}</li>`;
+      return `<li key={${index}}>${todo} <button onClick="removeTodo(${index})">Remove</button> </li>`;
     })
     .join("");
 };
