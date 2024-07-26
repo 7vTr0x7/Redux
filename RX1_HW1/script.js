@@ -1,4 +1,5 @@
 import { createStore } from "https://cdn.skypack.dev/redux";
+
 import cartReducer from "./cartReducer.js";
 import { addToCart, calculateTotal, removeFromCart } from "./action.js";
 
@@ -39,11 +40,9 @@ window.removeItem = (id) => {
   store.dispatch(removeFromCart(id));
 };
 
-const getTotalPrice = () => {
+const calculateTotalPrice = () => {
   store.dispatch(calculateTotal());
 };
-
-getTotalPrice();
 
 const updateCart = () => {
   const state = store.getState();
@@ -59,4 +58,7 @@ const updateCart = () => {
 };
 
 updateCart();
-store.subscribe(() => updateCart());
+store.subscribe(() => {
+  updateCart();
+  calculateTotalPrice();
+});
