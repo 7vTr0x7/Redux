@@ -1,4 +1,5 @@
 {
+  "type": "module",
   "dependencies": {
     "gitignore": "^0.7.0",
     "redux": "^5.0.1"

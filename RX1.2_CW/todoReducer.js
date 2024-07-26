@@ -1,5 +1,4 @@
-import { TODO_ADD, TODO_REMOVE } from "./action";
-import { TODO_ADD } from "./action";
+import { TODO_ADD, TODO_REMOVE } from "./action.js";
 const initialState = { todos: [] };
 
 const todoReducer = (state = initialState, action) => {
