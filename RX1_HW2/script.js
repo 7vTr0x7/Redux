@@ -5,6 +5,7 @@ const store = createStore(profileReducer);
 
 store.subscribe(() => {
   console.log(store.getState());
+  updateAverageAge();
 });
 
 const profiles = [
@@ -25,3 +26,11 @@ const renderProfiles = (profiles) => {
 };
 
 renderProfiles(profiles);
+
+const avgAge = document.querySelector("#avgAge");
+
+const updateAverageAge = () => {
+  const state = store.getState();
+  avgAge.textContent = `Average Age: ${state.averageAge}`;
+};
+updateAverageAge();
