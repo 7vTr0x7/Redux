@@ -1,4 +1,8 @@
-import { ADD_PROFILE, CALCULATE_AVERAGE_AGE, REMOVE_PROFILE } from "./action";
+import {
+  ADD_PROFILE,
+  CALCULATE_AVERAGE_AGE,
+  REMOVE_PROFILE,
+} from "./action.js";
 
 const initialState = { profiles: [], averageAge: 0 };
 
