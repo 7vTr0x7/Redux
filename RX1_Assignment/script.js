@@ -81,7 +81,7 @@ const removeTaskBtn = document.querySelector("#removeTaskBtn");
 removeTaskBtn.addEventListener("click", () => {
   const taskId = document.querySelector("#taskId");
   removeTaskFromStore(Number(taskId.value));
-  updateTotalTasks();
+  calculateTotal();
   updateTotalTasks();
 });
 
