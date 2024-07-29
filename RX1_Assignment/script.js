@@ -14,15 +14,12 @@ const addTaskToStore = (task) => {
 const calculateTotal = () => {
   store.dispatch(calculateTotalTasks());
 };
-calculateTotal();
 
 const totalTasks = document.querySelector("#totalTasks");
 
 const updateTotalTasks = () => {
   const state = store.getState();
-
-  if (state.totalTasks > 0)
-    totalTasks.textContent = `Total Tasks: ${state.totalTasks}`;
+  totalTasks.textContent = `Total Tasks: ${state.totalTasks}`;
 };
 
 const addTaskBtn = document.querySelector("#addTaskBtn");
@@ -38,11 +35,11 @@ addTaskBtn.addEventListener("click", () => {
     id: id,
     title: title.value,
     description: description.value,
+    completed: false,
   };
 
   addTaskToStore(newTask);
-
-  updateTotalTasks();
+  calculateTotal();
 });
 
 const taskList = document.querySelector("#taskList");
