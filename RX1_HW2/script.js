@@ -7,7 +7,10 @@ import {
   REMOVE_PROFILE,
 } from "./action.js";
 
-const store = createStore(profileReducer);
+const store = createStore(
+  profileReducer,
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+);
 
 const avgAge = document.querySelector("#avgAge");
 
@@ -69,6 +72,16 @@ addProfileBtn.addEventListener("click", () => {
     age: Number(age.value),
   };
   addProfile(newProfile);
+  calculateAvgAge();
+  renderProfiles();
+});
+
+const removeProfileBtn = document.querySelector("#removeProfileBtn");
+
+removeProfileBtn.addEventListener("click", () => {
+  const removeId = document.querySelector("#removeId");
+
+  removeProfile(Number(removeId.value));
   calculateAvgAge();
   renderProfiles();
 });
