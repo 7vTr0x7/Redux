@@ -1,5 +1,11 @@
+import IncAndExpForm from "./components/IncAndExpForm";
+
 const App = () => {
-  return <div></div>;
+  return (
+    <>
+      <IncAndExpForm />
+    </>
+  );
 };
 
 export default App;
