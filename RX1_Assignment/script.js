@@ -21,7 +21,8 @@ const totalTasks = document.querySelector("#totalTasks");
 const updateTotalTasks = () => {
   const state = store.getState();
 
-  totalTasks.textContent = `Total Tasks: ${state.totalTasks}`;
+  if (state.totalTasks > 0)
+    totalTasks.textContent = `Total Tasks: ${state.totalTasks}`;
 };
 
 const addTaskBtn = document.querySelector("#addTaskBtn");
