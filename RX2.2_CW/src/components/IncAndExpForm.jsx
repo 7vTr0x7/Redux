@@ -8,10 +8,12 @@ const IncAndExpForm = () => {
   const dispatch = useDispatch();
 
   const handleAddIncome = () => {
-    dispatch({ type: ADD_INCOME, payload: amount });
+    dispatch({ type: ADD_INCOME, payload: parseFloat(amount) });
+    setAmount(0);
   };
   const handleAddExpense = () => {
-    dispatch({ type: ADD_EXPENSE, payload: amount });
+    dispatch({ type: ADD_EXPENSE, payload: parseFloat(amount) });
+    setAmount(0);
   };
 
   return (
