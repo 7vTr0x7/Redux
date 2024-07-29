@@ -1,4 +1,4 @@
-import { createStore } from "https://cdn.skypack.dev/redux";
+import { createStore } from "redux";
 import counterReducer from "./counterReducer";
 
 const store = createStore(counterReducer);
