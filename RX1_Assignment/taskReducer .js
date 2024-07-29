@@ -17,11 +17,23 @@ const taskReducer = (state = initialState, action) => {
         tasks: state.tasks.filter((task) => action.payload != task.id),
       };
 
+    case TOGGLE_TASK:
+      return {
+        ...state,
+        tasks: [
+          ...state.tasks,
+          { ...action.payload, completed: !action.payload.completed },
+        ],
+      };
+
     case CALCULATE_TOTAL_TASKS:
       return {
         ...state,
         totalTasks: state.tasks.length,
       };
+
+    default:
+      return state;
   }
 };
 
