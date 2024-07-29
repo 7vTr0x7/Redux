@@ -44,6 +44,25 @@ addTaskBtn.addEventListener("click", () => {
   updateTotalTasks();
 });
 
+const taskList = document.querySelector("#taskList");
+
+const updateTaskList = () => {
+  const state = store.getState();
+
+  if (state.tasks.length > 0)
+    taskList.innerHTML = state.tasks
+      .map(
+        (task) => `<li key={task.id}>
+    <input type="checkbox" id="${task.id}" />
+    <label>${task.id}. ${task.title} - ${task.description}${
+          task.completed ? ": Completed" : ""
+        }</label>
+    </li>`
+      )
+      .join("");
+};
+
 store.subscribe(() => {
   updateTotalTasks();
+  updateTaskList();
 });
