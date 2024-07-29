@@ -1,7 +1,12 @@
 import React from "react";
+import BookInput from "./components/BookInput";
 
 const App = () => {
-  return <div></div>;
+  return (
+    <>
+      <BookInput />
+    </>
+  );
 };
 
 export default App;
