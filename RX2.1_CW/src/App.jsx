@@ -4,7 +4,7 @@ const App = () => {
   return (
     <div>
       <div>Counter: </div>
-      <button>Plus</button>
+      <button>Add</button>
       <button>Minus</button>
     </div>
   );
