@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { ADD_BOOK } from "./../redux/action";
+import { ADD_BOOK, TOTAL_BOOKS } from "./../redux/action";
 
 const BookInput = () => {
   const [title, setTitle] = useState("");
@@ -17,6 +17,7 @@ const BookInput = () => {
     };
 
     dispatch({ type: ADD_BOOK, payload: newBook });
+    dispatch({ type: TOTAL_BOOKS });
   };
 
   return (
