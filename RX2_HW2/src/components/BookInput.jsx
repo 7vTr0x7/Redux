@@ -21,7 +21,7 @@ const BookInput = () => {
 
   return (
     <div>
-      <h2>Library Management</h2>
+      <h1>Library Management</h1>
       <input
         placeholder="Title"
         value={title}
