@@ -19,7 +19,8 @@ const totalTasks = document.querySelector("#totalTasks");
 
 const updateTotalTasks = () => {
   const state = store.getState();
-  totalTasks.textContent = `Total Tasks: ${state.totalTasks}`;
+  state.totalTasks > 0 &&
+    (totalTasks.textContent = `Total Tasks: ${state.totalTasks}`);
 };
 
 const addTaskBtn = document.querySelector("#addTaskBtn");
@@ -55,9 +56,9 @@ const updateTaskList = () => {
     taskList.innerHTML = state.tasks
       .map(
         (task) => `<li key={task.id}>
-    <input type="checkbox" id={${task.id}} onChange={handleToggleTask(${
+    <input type="checkbox" ${task.completed && "checked"} id={${
           task.id
-        })} />
+        }} onChange="handleToggleTask(${task.id})"/>
     <label for={${task.id}}>${task.id}. ${task.title} - ${task.description}${
           task.completed ? ": Completed" : ""
         }</label>
