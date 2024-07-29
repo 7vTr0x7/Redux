@@ -13,7 +13,9 @@ const avgAge = document.querySelector("#avgAge");
 
 const updateAverageAge = () => {
   const state = store.getState();
-  avgAge.textContent = `Average Age: ${state.averageAge}`;
+  if (state.averageAge !== 0) {
+    avgAge.textContent = `Average Age: ${state.averageAge}`;
+  }
 };
 updateAverageAge();
 
@@ -46,10 +48,27 @@ const profilesList = document.querySelector("#profilesList");
 
 const renderProfiles = () => {
   const state = store.getState();
-  profilesList.innerHTML = state.profiles
-    .map(
-      (profile) =>
-        `<li key={${profile.id}}>${profile.id}. ${profile.name} ( ${profile.age} years old )</li>`
-    )
-    .join("");
+  if (state.profiles.length > 0)
+    profilesList.innerHTML = state.profiles
+      .map(
+        (profile) =>
+          `<li key={${profile.id}}>${profile.id}. ${profile.name} ( ${profile.age} years old )</li>`
+      )
+      .join("");
 };
+const addProfileBtn = document.querySelector("#addProfileBtn");
+
+addProfileBtn.addEventListener("click", () => {
+  const AddId = document.querySelector("#AddId");
+  const name = document.querySelector("#name");
+  const age = document.querySelector("#age");
+
+  const newProfile = {
+    id: Number(AddId.value),
+    name: name.value,
+    age: Number(age.value),
+  };
+  addProfile(newProfile);
+  calculateAvgAge();
+  renderProfiles();
+});
