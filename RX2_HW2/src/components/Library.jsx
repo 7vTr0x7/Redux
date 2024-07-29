@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { REMOVE_BOOK } from "../redux/action";
+import { REMOVE_BOOK, TOTAL_BOOKS } from "../redux/action";
 import { useDispatch } from "react-redux";
 
 const Library = () => {
@@ -11,6 +11,7 @@ const Library = () => {
 
   const removeBookHandler = (isbn) => {
     dispatch({ type: REMOVE_BOOK, payload: isbn });
+    dispatch({ type: TOTAL_BOOKS });
   };
 
   return (
@@ -21,7 +22,7 @@ const Library = () => {
         {books.length > 0 &&
           books.map((book) => (
             <li key={book.ISBN}>
-              {`${book.title} by ${book.author} (ISBN: ${book.ISBN})`}{" "}
+              {`${book.title} by ${book.author} (ISBN: ${book.ISBN})`}
               <button onClick={() => removeBookHandler(book.ISBN)}>
                 Remove
               </button>

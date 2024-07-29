@@ -18,6 +18,9 @@ const BookInput = () => {
 
     dispatch({ type: ADD_BOOK, payload: newBook });
     dispatch({ type: TOTAL_BOOKS });
+    setAuthor("");
+    setTitle("");
+    setIsbn("");
   };
 
   return (
