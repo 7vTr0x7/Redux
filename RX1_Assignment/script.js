@@ -11,6 +11,19 @@ const addTaskToStore = (task) => {
   store.dispatch(addTask(task));
 };
 
+const calculateTotal = () => {
+  store.dispatch(calculateTotalTasks());
+};
+calculateTotal();
+
+const totalTasks = document.querySelector("#totalTasks");
+
+const updateTotalTasks = () => {
+  const state = store.getState();
+
+  totalTasks.textContent = `Total Tasks: ${state.totalTasks}`;
+};
+
 const addTaskBtn = document.querySelector("#addTaskBtn");
 
 addTaskBtn.addEventListener("click", () => {
@@ -27,8 +40,10 @@ addTaskBtn.addEventListener("click", () => {
   };
 
   addTaskToStore(newTask);
+
+  updateTotalTasks();
 });
 
 store.subscribe(() => {
-  console.log(store.getState());
+  updateTotalTasks();
 });
