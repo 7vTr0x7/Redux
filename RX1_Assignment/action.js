@@ -13,9 +13,9 @@ export const removeTask = (id) => ({
   payload: id,
 });
 
-export const toggleTask = (task) => ({
+export const toggleTask = (id) => ({
   type: TOGGLE_TASK,
-  payload: task,
+  payload: id,
 });
 
 export const calculateTotalTasks = () => ({
