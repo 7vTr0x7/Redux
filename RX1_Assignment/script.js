@@ -1,6 +1,6 @@
 import { createStore } from "https://cdn.skypack.dev/redux";
 import taskReducer from "./taskReducer.js";
-import { addTask, calculateTotalTasks } from "./action.js";
+import { addTask, calculateTotalTasks, toggleTask } from "./action.js";
 
 const store = createStore(
   taskReducer,
@@ -42,6 +42,10 @@ addTaskBtn.addEventListener("click", () => {
   calculateTotal();
 });
 
+window.handleToggleTask = (id) => {
+  store.dispatch(toggleTask(id));
+};
+
 const taskList = document.querySelector("#taskList");
 
 const updateTaskList = () => {
@@ -51,8 +55,10 @@ const updateTaskList = () => {
     taskList.innerHTML = state.tasks
       .map(
         (task) => `<li key={task.id}>
-    <input type="checkbox" id="${task.id}" />
-    <label>${task.id}. ${task.title} - ${task.description}${
+    <input type="checkbox" id={${task.id}} onChange={handleToggleTask(${
+          task.id
+        })} />
+    <label for={${task.id}}>${task.id}. ${task.title} - ${task.description}${
           task.completed ? ": Completed" : ""
         }</label>
     </li>`
@@ -60,7 +66,9 @@ const updateTaskList = () => {
       .join("");
 };
 
+updateTotalTasks();
+
 store.subscribe(() => {
-  updateTotalTasks();
   updateTaskList();
+  updateTotalTasks();
 });

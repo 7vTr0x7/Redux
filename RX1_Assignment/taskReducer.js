@@ -18,10 +18,13 @@ const taskReducer = (state = initialState, action) => {
       };
 
     case TOGGLE_TASK:
-      const task = state.tasks.find((task) => task.id === action.payload);
       return {
         ...state,
-        tasks: [...state.tasks, { ...task, completed: !task.completed }],
+        tasks: state.tasks.map((task) =>
+          task.id === action.payload
+            ? { ...task, completed: !task.completed }
+            : task
+        ),
       };
 
     case CALCULATE_TOTAL_TASKS:
