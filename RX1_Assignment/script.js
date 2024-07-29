@@ -1,6 +1,11 @@
 import { createStore } from "https://cdn.skypack.dev/redux";
 import taskReducer from "./taskReducer.js";
-import { addTask, calculateTotalTasks, toggleTask } from "./action.js";
+import {
+  addTask,
+  calculateTotalTasks,
+  removeTask,
+  toggleTask,
+} from "./action.js";
 
 const store = createStore(
   taskReducer,
@@ -67,7 +72,18 @@ const updateTaskList = () => {
       .join("");
 };
 
-updateTotalTasks();
+const removeTaskFromStore = (id) => {
+  store.dispatch(removeTask(id));
+};
+
+const removeTaskBtn = document.querySelector("#removeTaskBtn");
+
+removeTaskBtn.addEventListener("click", () => {
+  const taskId = document.querySelector("#taskId");
+  removeTaskFromStore(Number(taskId.value));
+  updateTotalTasks();
+  updateTotalTasks();
+});
 
 store.subscribe(() => {
   updateTaskList();
