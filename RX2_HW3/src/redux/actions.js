@@ -19,7 +19,6 @@ export const addItemToItems = (entry) => async (dispatch) => {
     }
     const data = await res.json();
     if (data.success === true) {
-      console.log(data);
       dispatch({ type: ADD_ITEM, payload: data.data });
     }
   } catch (error) {
@@ -44,7 +43,6 @@ export const addItemToRemovedItems = (entry) => async (dispatch) => {
     }
     const data = await res.json();
     if (data.success === true) {
-      console.log(data);
       dispatch({ type: ADD_ITEM, payload: data.data });
     }
   } catch (error) {
@@ -62,7 +60,6 @@ export const storageItems = () => async (dispatch) => {
     }
     const data = await res.json();
     if (data) {
-      console.log(data);
       dispatch({ type: FETCH_ITEMS, payload: data });
     }
   } catch (error) {
@@ -79,7 +76,6 @@ export const removedItems = () => async (dispatch) => {
     }
     const data = await res.json();
     if (data) {
-      console.log(data);
       dispatch({ type: FETCH_REMOVED_ITEMS, payload: data });
     }
   } catch (error) {
