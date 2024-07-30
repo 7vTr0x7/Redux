@@ -6,6 +6,8 @@ const Inventory = () => {
   const dispatch = useDispatch();
   const items = useSelector((state) => state.items);
 
+  const totalItems = items.reduce((acc, curr) => acc + curr.itemQuantity, 0);
+
   useEffect(() => {
     dispatch(storageItems());
   }, []);
@@ -20,7 +22,7 @@ const Inventory = () => {
           </li>
         ))}
       </ul>
-      <h2>Total Inventory Items:</h2>
+      <h2>Total Inventory Items: {totalItems}</h2>
     </div>
   );
 };
