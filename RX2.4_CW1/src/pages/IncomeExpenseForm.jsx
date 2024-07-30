@@ -35,8 +35,8 @@ const IncomeExpenseForm = () => {
           id="selectEntryType"
           value={entryType}
           onChange={(e) => setEntryType(e.target.value)}>
-          <option value="Income">Income</option>
-          <option value="Expense">Expense</option>
+          <option value="income">Income</option>
+          <option value="expense">Expense</option>
         </select>
         <br />
         <br />
