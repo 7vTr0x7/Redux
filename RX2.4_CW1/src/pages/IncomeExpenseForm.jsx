@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { addEntry } from "../redux/actions";
+import { addExpense, addIncome } from "../redux/actions";
 
 const IncomeExpenseForm = () => {
   const [amount, setAmount] = useState("");
@@ -12,7 +12,15 @@ const IncomeExpenseForm = () => {
   const handleAddEntry = (e) => {
     e.preventDefault();
 
-    dispatch(addEntry({ description, amount: parseFloat(amount), entryType }));
+    if (entryType === "income") {
+      dispatch(
+        addIncome({ description, amount: parseFloat(amount), entryType })
+      );
+    } else {
+      dispatch(
+        addExpense({ description, amount: parseFloat(amount), entryType })
+      );
+    }
     setDescription("");
     setAmount("");
     setEntryType("income");
