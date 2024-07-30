@@ -15,7 +15,7 @@ const reducer = (state = initialState, action) => {
         removesItems: action.payload,
       };
     case ADD_ITEM:
-      if (action.payload.entryType === "add") {
+      if (action.payload.entryType === "addToStorage") {
         return {
           ...state,
           items: [...state.items, action.payload],
