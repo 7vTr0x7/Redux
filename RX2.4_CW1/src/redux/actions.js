@@ -28,7 +28,7 @@ export const addEntry = (entry) => async (dispatch) => {
   }
 };
 
-const fetchIncome = () => async (dispatch) => {
+export const fetchIncome = () => async (dispatch) => {
   try {
     const res = await fetch(
       "https://finance-app-backend-Student-neoG.replit.app/income"
@@ -44,5 +44,24 @@ const fetchIncome = () => async (dispatch) => {
     }
   } catch (error) {
     console.log("error occurred while fetching income");
+  }
+};
+
+export const fetchExpenses = () => async (dispatch) => {
+  try {
+    const res = await fetch(
+      "https://finance-app-backend-Student-neoG.replit.app/expenses"
+    );
+
+    if (!res.ok) {
+      console.log("Failed to fetch");
+    }
+
+    const data = await res.json();
+    if (data) {
+      dispatch({ type: FETCH_EXPENSES, payload: data });
+    }
+  } catch (error) {
+    console.log("error occurred while fetching expenses");
   }
 };
