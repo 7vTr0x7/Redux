@@ -27,3 +27,22 @@ export const addEntry = (entry) => async (dispatch) => {
     console.log("Error adding entry");
   }
 };
+
+const fetchIncome = () => async (dispatch) => {
+  try {
+    const res = await fetch(
+      "https://finance-app-backend-Student-neoG.replit.app/income"
+    );
+
+    if (!res.ok) {
+      console.log("Failed to fetch");
+    }
+
+    const data = await res.json();
+    if (data) {
+      dispatch({ type: FETCH_INCOME, payload: data });
+    }
+  } catch (error) {
+    console.log("error occurred while fetching income");
+  }
+};
