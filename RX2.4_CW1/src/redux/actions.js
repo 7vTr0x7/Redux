@@ -4,8 +4,7 @@ export const ADD_ENTRY = "ADD_ENTRY_SUCCESS";
 
 export const addEntry = (entry) => async (dispatch) => {
   try {
-    console.log(entry);
-    const res = fetch(
+    const res = await fetch(
       " https://finance-app-backend-Student-neoG.replit.app/add-income",
       {
         method: "POST",
@@ -20,9 +19,9 @@ export const addEntry = (entry) => async (dispatch) => {
       console.log("Failed to add entry");
     }
 
-    const data = res.json();
+    const data = await res.json();
     if (data.success === true) {
-      console.log(data);
+      dispatch({ type: ADD_ENTRY, payload: data.data });
     }
   } catch (error) {
     console.log("Error adding entry");
