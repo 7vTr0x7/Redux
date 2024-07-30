@@ -18,8 +18,9 @@ export const addItemToItems = (entry) => async (dispatch) => {
       console.log("Failed to add");
     }
     const data = await res.json();
-    if (data) {
+    if (data.success === true) {
       console.log(data);
+      dispatch({ type: ADD_ITEM, payload: data.data });
     }
   } catch (error) {
     console.log("Error Occurred While Adding Item");
