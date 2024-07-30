@@ -14,7 +14,7 @@ const RemovedItems = () => {
 
   return (
     <div>
-      <h1>Removed Items</h1>
+      <h1>Removed Items From Inventory</h1>
       <ul>
         {items.map((item, index) => (
           <li key={index}>
@@ -22,7 +22,7 @@ const RemovedItems = () => {
           </li>
         ))}
       </ul>
-      <h2>Total Removed Items: {totalItems}</h2>
+      <h2>Removed Items Total: {totalItems}</h2>
     </div>
   );
 };
