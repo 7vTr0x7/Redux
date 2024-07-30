@@ -15,7 +15,7 @@ export const addItemToItems = (entry) => async (dispatch) => {
       }
     );
     if (!res.ok) {
-      console.log("Failed to add");
+      console.log("Failed to add", res);
     }
     const data = await res.json();
     if (data.success === true) {
@@ -46,6 +46,24 @@ export const addItemToRemovedItems = (entry) => async (dispatch) => {
     if (data.success === true) {
       console.log(data);
       dispatch({ type: ADD_ITEM, payload: data.data });
+    }
+  } catch (error) {
+    console.log("Error Occurred While Adding Item");
+  }
+};
+
+export const storageItems = () => async (dispatch) => {
+  try {
+    const res = await fetch(
+      "https://inventory-storage-app-backend-student-neog.replit.app/storage-items"
+    );
+    if (!res.ok) {
+      console.log("Failed to add");
+    }
+    const data = await res.json();
+    if (data) {
+      console.log(data);
+      dispatch({ type: FETCH_ITEMS, payload: data });
     }
   } catch (error) {
     console.log("Error Occurred While Adding Item");
