@@ -1,6 +1,6 @@
 import { ADD_ITEM, FETCH_ITEMS, FETCH_REMOVED_ITEMS } from "./actions";
 
-const initialState = { items: [], removesItems: [] };
+const initialState = { items: [], removedItems: [] };
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
@@ -12,7 +12,7 @@ const reducer = (state = initialState, action) => {
     case FETCH_REMOVED_ITEMS:
       return {
         ...state,
-        removesItems: action.payload,
+        removedItems: action.payload,
       };
     case ADD_ITEM:
       if (action.payload.entryType === "addToStorage") {
@@ -23,7 +23,7 @@ const reducer = (state = initialState, action) => {
       } else {
         return {
           ...state,
-          removesItems: [...state.items, action.payload],
+          removedItems: [...state.items, action.payload],
         };
       }
     default:
