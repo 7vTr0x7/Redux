@@ -5,7 +5,7 @@ import { addItemToItems, addItemToRemovedItems } from "../redux/actions";
 const InventoryForm = () => {
   const [itemName, setItemName] = useState("");
   const [quantity, setQuantity] = useState("");
-  const [entryType, setEntryType] = useState("Add to storage");
+  const [entryType, setEntryType] = useState("add");
 
   const dispatch = useDispatch();
 
