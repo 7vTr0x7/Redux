@@ -29,6 +29,10 @@ const InventoryForm = () => {
         })
       );
     }
+
+    setItemName("");
+    setQuantity("");
+    setEntryType("addToStorage");
   };
 
   return (
