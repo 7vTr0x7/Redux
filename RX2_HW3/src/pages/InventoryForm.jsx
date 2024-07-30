@@ -32,8 +32,8 @@ const InventoryForm = () => {
         <label htmlFor="entryType">Entry Type: </label>
         <br />
         <select id="entryType" onChange={(e) => setEntryType(e.target.value)}>
-          <option value="Add">Add to storage</option>
-          <option value="Remove">Remove from storage</option>
+          <option value="add">Add to storage</option>
+          <option value="remove">Remove from storage</option>
         </select>
         <br />
         <br />
