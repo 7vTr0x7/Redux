@@ -24,7 +24,7 @@ const InventoryForm = () => {
       dispatch(
         addItemToRemovedItems({
           itemName,
-          quantity: parseInt(quantity),
+          itemQuantity: parseInt(quantity),
           entryType,
         })
       );
