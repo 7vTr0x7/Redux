@@ -1,9 +1,31 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { addItemToItems, addItemToRemovedItems } from "../redux/actions";
 
 const InventoryForm = () => {
   const [itemName, setItemName] = useState("");
   const [quantity, setQuantity] = useState("");
   const [entryType, setEntryType] = useState("Add to storage");
+
+  const dispatch = useDispatch();
+
+  const handleAddItem = (e) => {
+    e.preventDefault();
+
+    if (entryType === "add") {
+      dispatch(
+        addItemToItems({ itemName, quantity: parseInt(quantity), entryType })
+      );
+    } else {
+      dispatch(
+        addItemToRemovedItems({
+          itemName,
+          quantity: parseInt(quantity),
+          entryType,
+        })
+      );
+    }
+  };
 
   return (
     <div>
@@ -37,7 +59,7 @@ const InventoryForm = () => {
         </select>
         <br />
         <br />
-        <button>Add Item Data</button>
+        <button onClick={handleAddItem}>Add Item Data</button>
       </form>
     </div>
   );
