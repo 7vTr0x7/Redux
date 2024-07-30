@@ -5,16 +5,20 @@ import { addItemToItems, addItemToRemovedItems } from "../redux/actions";
 const InventoryForm = () => {
   const [itemName, setItemName] = useState("");
   const [quantity, setQuantity] = useState("");
-  const [entryType, setEntryType] = useState("add");
+  const [entryType, setEntryType] = useState("addToStorage");
 
   const dispatch = useDispatch();
 
   const handleAddItem = (e) => {
     e.preventDefault();
 
-    if (entryType === "add") {
+    if (entryType === "addToStorage") {
       dispatch(
-        addItemToItems({ itemName, quantity: parseInt(quantity), entryType })
+        addItemToItems({
+          itemName,
+          itemQuantity: parseInt(quantity),
+          entryType,
+        })
       );
     } else {
       dispatch(
@@ -54,8 +58,8 @@ const InventoryForm = () => {
         <label htmlFor="entryType">Entry Type: </label>
         <br />
         <select id="entryType" onChange={(e) => setEntryType(e.target.value)}>
-          <option value="add">Add to storage</option>
-          <option value="remove">Remove from storage</option>
+          <option value="addToStorage">Add to storage</option>
+          <option value="removeFromStorage">Remove from storage</option>
         </select>
         <br />
         <br />
