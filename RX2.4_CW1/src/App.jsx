@@ -9,20 +9,24 @@ const App = () => {
   return (
     <>
       <Router>
-        <ul>
-          <li>
-            <Link to="/income">Income</Link>
-          </li>
-          <li>
-            <Link to="/expense">Expense</Link>
-          </li>
-          <li>
-            <Link to="/savings">Savings</Link>
-          </li>
-          <li>
-            <Link to="/">New Entries</Link>
-          </li>
-        </ul>
+        <div>
+          <nav>
+            <ul>
+              <li>
+                <Link to="/income">Income</Link>
+              </li>
+              <li>
+                <Link to="/expense">Expense</Link>
+              </li>
+              <li>
+                <Link to="/savings">Savings</Link>
+              </li>
+              <li>
+                <Link to="/">New Entries</Link>
+              </li>
+            </ul>
+          </nav>
+        </div>
 
         <Routes>
           <Route path="/income" element={<Income />} />
