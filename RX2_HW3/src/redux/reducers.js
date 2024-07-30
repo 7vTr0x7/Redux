@@ -1,18 +1,20 @@
+import { ADD_ITEM, FETCH_ITEMS, FETCH_REMOVED_ITEMS } from "./actions";
+
 const initialState = { items: [], removesItems: [] };
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case "FETCH_ITEMS":
+    case FETCH_ITEMS:
       return {
         ...state,
         items: action.payload,
       };
-    case "FETCH_REMOVED_ITEMS":
+    case FETCH_REMOVED_ITEMS:
       return {
         ...state,
         removesItems: action.payload,
       };
-    case "ADD_ITEM":
+    case ADD_ITEM:
       if (action.payload.entryType === "add") {
         return {
           ...state,
