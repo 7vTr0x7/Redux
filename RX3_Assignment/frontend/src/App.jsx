@@ -1,10 +1,10 @@
 import React from "react";
-import Students from "./features/students/Students";
+import StudentView from "./features/students/StudentView";
 
 const App = () => {
   return (
     <div>
-      <Students />
+      <StudentView />
     </div>
   );
 };
