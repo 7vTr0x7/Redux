@@ -14,9 +14,9 @@ const Tasks = () => {
           <ul>
             {task.tasks.map((task) => (
               <>
-                <li key={task.id}>
+                <li key={task.taskId}>
                   {`${task.description} `}
-                  <button onClick={() => dispatch(toggleStatus(task.id))}>
+                  <button onClick={() => dispatch(toggleStatus(task.taskId))}>
                     {task.status}
                   </button>
                 </li>
