@@ -1,9 +1,10 @@
 import React from "react";
-import { useSelector,useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { toggleStatus } from "./taskSlice";
 
 const Tasks = () => {
   const tasks = useSelector((state) => state.tasks);
-const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   return (
     <div>
@@ -15,7 +16,9 @@ const dispatch = useDispatch()
               <>
                 <li key={task.id}>
                   {`${task.description} `}
-                  <button onClick={() => dispatch()}>{task.status}</button>
+                  <button onClick={() => dispatch(toggleStatus(task.id))}>
+                    {task.status}
+                  </button>
                 </li>
               </>
             ))}
