@@ -48,8 +48,8 @@ const taskSlice = createSlice({
   },
   reducers: {
     toggleStatus: (state, action) => {
-      return state.tasks.map((task) => {
-        return task.tasks.map((task) => {
+      const todos = state.tasks.map((task) => {
+        const todoTasks = task.tasks.map((task) => {
           if (task.taskId === action.payload) {
             if (task.status === "Completed") {
               task.status = "Pending";
