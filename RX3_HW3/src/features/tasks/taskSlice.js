@@ -1,4 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { axios } from "axios";
+
+export const fetchTasks = createAsyncThunk("tasks/fetchTasks", async () => {
+  const res = await axios.get(
+    "https://task-list-hw-server-Student-neoG-Ca.replit.app/tasks"
+  );
+  console.log(res);
+});
 
 const taskSlice = createSlice({
   name: "tasks",
