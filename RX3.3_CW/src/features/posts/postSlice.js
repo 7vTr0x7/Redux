@@ -14,6 +14,7 @@ const postSlice = createSlice({
   initialState: {
     posts: [],
     status: "idle",
+    error: null,
   },
   reducers: {
     likeButtonClicked: (state, action) => {
@@ -23,6 +24,19 @@ const postSlice = createSlice({
 
       state.posts[postIndex].likes += 1;
     },
+  },
+  extraReducers: (builder) => {
+    builder.addCase(fetchPosts.pending, (state) => {
+      state.status = "Loading";
+    });
+    builder.addCase(fetchPosts.fulfilled, (state, action) => {
+      state.status = "Success";
+      state.posts = action.payload.posts;
+    });
+    builder.addCase(fetchPosts.rejected, (state, action) => {
+      state.status = "Error";
+      state.error = action.payload.message;
+    });
   },
 });
 
