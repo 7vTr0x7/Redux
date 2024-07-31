@@ -13,12 +13,15 @@ const Tasks = () => {
           <h2>{task.date}</h2>
           <ul>
             {task.tasks.map((todoTask) => (
-              <li key={todoTask.taskId}>
-                {`${todoTask.description} `}
-                <button onClick={() => dispatch(toggleStatus(todoTask.taskId))}>
-                  {todoTask.status}
-                </button>
-              </li>
+              <p key={todoTask.taskId}>
+                <li>
+                  {`${todoTask.description} `}
+                  <button
+                    onClick={() => dispatch(toggleStatus(todoTask.taskId))}>
+                    {todoTask.status}
+                  </button>
+                </li>
+              </p>
             ))}
           </ul>
         </div>
