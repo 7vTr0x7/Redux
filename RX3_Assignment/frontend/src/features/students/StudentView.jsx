@@ -9,7 +9,7 @@ const StudentView = () => {
 
   useEffect(() => {
     dispatch(fetchStudents());
-  });
+  }, []);
 
   return (
     <div>

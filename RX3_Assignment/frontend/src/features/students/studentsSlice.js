@@ -1,10 +1,11 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import axios from "axios";
 
 export const fetchStudents = createAsyncThunk("fetchStudents", async () => {
   try {
-    const res = await fetch("http://localhost:4000/students");
-    const data = await res.json();
-    return data
+    const res = await axios.get("http://localhost:4000/students");
+
+    return res;
   } catch (error) {
     console.log("Error While fetching");
   }
@@ -16,5 +17,18 @@ export const studentsSlice = createSlice({
     students: [],
     status: "idle",
     error: null,
+  },
+  reducers: {},
+  extraReducers: (builder) => {
+    builder.addCase(fetchStudents.pending, (state) => {
+      state.status = "Loading";
+    });
+    builder.addCase(fetchStudents.fulfilled, (state, action) => {
+      state.status = "Success";
+      state.students = action.payload;
+    });
+    builder.addCase(fetchStudents.rejected, (state) => {
+      state.status = "Error";
+    });
   },
 });
