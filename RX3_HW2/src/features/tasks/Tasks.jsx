@@ -1,8 +1,9 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useSelector,useDispatch } from "react-redux";
 
 const Tasks = () => {
   const tasks = useSelector((state) => state.tasks);
+const dispatch = useDispatch()
 
   return (
     <div>
@@ -12,8 +13,10 @@ const Tasks = () => {
           <ul>
             {task.tasks.map((task) => (
               <>
-                <li key={task.id}>{task.description}</li>
-                <p>Status: {task.status}</p>
+                <li key={task.id}>
+                  {`${task.description} `}
+                  <button onClick={() => dispatch()}>{task.status}</button>
+                </li>
               </>
             ))}
           </ul>
