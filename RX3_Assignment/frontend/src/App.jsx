@@ -1,7 +1,12 @@
 import React from "react";
+import Students from "./features/students/Students";
 
 const App = () => {
-  return <div></div>;
+  return (
+    <div>
+      <Students />
+    </div>
+  );
 };
 
 export default App;

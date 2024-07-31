@@ -17,7 +17,11 @@ app.get("/", (req, res) => {
 app.get("/students", async (req, res) => {
   try {
     const students = await Student.find();
-    res.json(students);
+    if (students.length > 0) {
+      res.json(students);
+    } else {
+      res.status(404).json({ error: "Students not found" });
+    }
   } catch (error) {
     res.status(500).json({ error: "Internal server error" });
   }
