@@ -1,10 +1,14 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { toggleStatus } from "./taskSlice";
+import { fetchTasks, toggleStatus } from "./taskSlice";
 
 const Tasks = () => {
-  const tasks = useSelector((state) => state.tasks);
   const dispatch = useDispatch();
+  const tasks = useSelector((state) => state.tasks);
+
+  useEffect(() => {
+    dispatch(fetchTasks());
+  }, []);
 
   return (
     <div>

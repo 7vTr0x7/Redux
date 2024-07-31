@@ -1,58 +1,20 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { axios } from "axios";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import axios from "axios";
+import { act } from "react";
 
 export const fetchTasks = createAsyncThunk("tasks/fetchTasks", async () => {
   const res = await axios.get(
     "https://task-list-hw-server-Student-neoG-Ca.replit.app/tasks"
   );
-  console.log(res);
+  return res.data;
 });
 
 const taskSlice = createSlice({
   name: "tasks",
   initialState: {
-    tasks: [
-      {
-        date: "15/07/2024",
-        tasks: [
-          {
-            taskId: "1",
-
-            description: "Get groceries from the market.",
-            status: "Pending",
-          },
-          {
-            taskId: "2",
-
-            description: "Go to gym.",
-            status: "Completed",
-          },
-          {
-            taskId: "4",
-
-            description: "Water the plants.",
-            status: "Completed",
-          },
-        ],
-      },
-      {
-        date: "16/07/2024",
-        tasks: [
-          {
-            taskId: "5",
-
-            description: "Go to the park.",
-            status: "Completed",
-          },
-          {
-            taskId: "6",
-
-            description: "Get my room cleaned",
-            status: "Pending",
-          },
-        ],
-      },
-    ],
+    tasks: [],
+    status: "idle",
+    error: null,
   },
   reducers: {
     toggleStatus: (state, action) => {
@@ -68,6 +30,19 @@ const taskSlice = createSlice({
         });
       });
     },
+  },
+  extraReducers: (builder) => {
+    builder.addCase(fetchTasks.pending, (state) => {
+      state.status = "Loading";
+    });
+    builder.addCase(fetchTasks.fulfilled, (state, action) => {
+      state.status = "Success";
+      state.tasks = action.payload.tasks;
+    });
+    builder.addCase(fetchTasks.rejected, (state, action) => {
+      state.status = "Error";
+      state.tasks = action.payload.message;
+    });
   },
 });
 
