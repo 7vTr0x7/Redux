@@ -15,10 +15,10 @@ const StudentView = () => {
 
   return (
     <div>
-      {status === "pending" && <p>{status}</p>}
+      {status === "pending" && <p>Loading...</p>}
       {error && <p>Error: {error}</p>}
       <h1>Student View</h1>
-      <StudentList students={students} />
+      <StudentList students={students.students} />
     </div>
   );
 };
