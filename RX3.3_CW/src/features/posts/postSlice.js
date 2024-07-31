@@ -1,28 +1,19 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import axios from "axios";
+
+export const fetchPosts = createAsyncThunk("posts/fetchPosts", async () => {
+  const response = await axios.get(
+    "https://social-media-cw-server-student-neog.replit.app/posts"
+  );
+
+  return response.data;
+});
 
 const postSlice = createSlice({
   name: "posts",
   initialState: {
-    posts: [
-      {
-        postId: "post001",
-        caption: "non",
-        likes: 9,
-        user: {
-          userId: "non1",
-          userName: "non001",
-        },
-      },
-      {
-        postId: "post002",
-        caption: "non",
-        likes: 9,
-        user: {
-          userId: "non2",
-          userName: "non002",
-        },
-      },
-    ],
+    posts: [],
+    status: "idle",
   },
   reducers: {
     likeButtonClicked: (state, action) => {
