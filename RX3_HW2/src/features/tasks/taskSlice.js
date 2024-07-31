@@ -46,6 +46,23 @@ const taskSlice = createSlice({
       },
     ],
   },
+  reducers: {
+    toggleStatus: (state, action) => {
+      return state.tasks.map((task) => {
+        return task.tasks.map((task) => {
+          if (task.taskId === action.payload) {
+            if (task.status === "Completed") {
+              task.status = "Pending";
+            } else {
+              task.status = "Completed";
+            }
+          }
+        });
+      });
+    },
+  },
 });
+
+export const { toggleStatus } = taskSlice.actions;
 
 export default taskSlice.reducer;
