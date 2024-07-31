@@ -2,13 +2,8 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
 export const fetchStudents = createAsyncThunk("fetchStudents", async () => {
-  try {
-    const res = await axios.get("http://localhost:4000/students");
-
-    return res;
-  } catch (error) {
-    console.log("Error While fetching");
-  }
+  const res = await axios.get("http://localhost:4000/students");
+  return res.data;
 });
 
 export const studentsSlice = createSlice({
