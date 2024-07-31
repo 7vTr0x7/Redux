@@ -22,8 +22,9 @@ export const studentsSlice = createSlice({
       state.status = "Success";
       state.students = action.payload;
     });
-    builder.addCase(fetchStudents.rejected, (state) => {
+    builder.addCase(fetchStudents.rejected, (state, action) => {
       state.status = "Error";
+      state.error = action.payload.message;
     });
   },
 });
