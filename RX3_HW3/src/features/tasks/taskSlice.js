@@ -21,10 +21,10 @@ const taskSlice = createSlice({
       const todos = state.tasks.map((task) => {
         const todoTasks = task.tasks.map((task) => {
           if (task.taskId === action.payload) {
-            if (task.status === "Completed") {
-              task.status = "Pending";
+            if (task.taskStatus === "Completed") {
+              task.taskStatus = "Pending";
             } else {
-              task.status = "Completed";
+              task.taskStatus = "Completed";
             }
           }
         });
