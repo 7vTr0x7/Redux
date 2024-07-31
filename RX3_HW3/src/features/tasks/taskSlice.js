@@ -1,6 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
-import { act } from "react";
 
 export const fetchTasks = createAsyncThunk("tasks/fetchTasks", async () => {
   const res = await axios.get(
