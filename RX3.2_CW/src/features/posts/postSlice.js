@@ -24,7 +24,16 @@ const postSlice = createSlice({
       },
     ],
   },
-  reducers: {},
+  reducers: {
+    likeButtonClicked: (state, action) => {
+      const postIndex = state.posts.findIndex(
+        (post) => post.postId === action.payload
+      );
+
+      state.posts[postIndex].likes += 1;
+    },
+  },
 });
 
+export const { likeButtonClicked } = postSlice.actions;
 export default postSlice.reducer;
