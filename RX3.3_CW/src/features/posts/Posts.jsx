@@ -5,6 +5,8 @@ import { fetchPosts, likeButtonClicked } from "./postSlice";
 const Posts = () => {
   const dispatch = useDispatch();
   const posts = useSelector((state) => state.posts);
+  const status = useSelector((state) => state.status);
+  const error = useSelector((state) => state.error);
 
   useEffect(() => {
     dispatch(fetchPosts());
@@ -12,6 +14,8 @@ const Posts = () => {
 
   return (
     <div>
+      {status === "Loading" && <p>Loading...</p>}
+      {error && <p>{error}</p>}
       {posts.posts.map((post) => (
         <div key={post.postId}>
           <p>{post.caption}</p>
