@@ -7,7 +7,7 @@ const StudentList = ({ students }) => {
       <h2>Student List</h2>
 
       <ul>
-        {students &&
+        {students.length > 0 &&
           students.map((student) => (
             <li key={student._id}>
               <Link className="nav-link" to={`/${student._id}`}>
