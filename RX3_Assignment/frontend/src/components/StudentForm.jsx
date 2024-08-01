@@ -15,6 +15,7 @@ const StudentForm = () => {
 
   const [attendance, setAttendance] = useState("");
   const [marks, setMarks] = useState("");
+  const [submitted, setSubmitted] = useState(false);
 
   const location = useLocation();
 
@@ -52,6 +53,7 @@ const StudentForm = () => {
     setGrade("");
     setAttendance("");
     setMarks("");
+    setSubmitted(true);
   };
 
   useEffect(() => {
@@ -146,8 +148,14 @@ const StudentForm = () => {
               type="submit"
               onClick={submitHandler}
               className="btn btn-info my-3">
-              {student ? "Update" : "App"}
+              {student ? "Update" : "Add"}
             </button>
+            <p>
+              {submitted &&
+                (student
+                  ? "Student Details Updated"
+                  : "Student Added Successfully")}
+            </p>
           </div>
         </form>
       </div>
