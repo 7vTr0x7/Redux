@@ -1,7 +1,8 @@
-import React, { useState } from "react";
-import Header from "./Header";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useLocation } from "react-router-dom";
 import { addStudentAsync } from "../features/students/studentsSlice";
+import Header from "./Header";
 
 const StudentForm = () => {
   const [name, setName] = useState("");
@@ -9,26 +10,55 @@ const StudentForm = () => {
   const [grade, setGrade] = useState("");
   const [gender, setGender] = useState("");
 
+  const [attendance, setAttendance] = useState("");
+  const [marks, setMarks] = useState("");
+
+  const location = useLocation();
+
+  const { student } = location.state || {};
+
   const dispatch = useDispatch();
   const students = useSelector((state) => state.students);
 
   const submitHandler = (e) => {
     e.preventDefault();
 
-    const newStudent = {
-      name: name,
-      age: Number(age),
-      grade: grade,
-      gender: gender,
-    };
+    if (student) {
+      const newStudent = {
+        name: name,
+        age: Number(age),
+        grade: grade,
+        gender: gender,
+        attendance: Number(attendance),
+        marks: Number(marks),
+      };
 
-    dispatch(addStudentAsync(newStudent));
+      dispatch(updateStudentAsync(student._id, newStudent));
+    } else {
+      const newStudent = {
+        name: name,
+        age: Number(age),
+        grade: grade,
+        gender: gender,
+      };
+
+      dispatch(addStudentAsync(newStudent));
+    }
 
     setAge("");
     setName("");
     setGender("");
     setGrade("");
   };
+
+  useEffect(() => {
+    if (student) {
+      setName(student.name);
+      setAge(student.age);
+      setGender(student.gender);
+      setGrade(student.grade);
+    }
+  }, []);
 
   return (
     <div>
@@ -88,12 +118,32 @@ const StudentForm = () => {
                 />
                 {" Female"}
               </label>
+              {student && (
+                <>
+                  <div className="pt-3">
+                    <input
+                      placeholder="Attendance"
+                      className="form-control"
+                      value={attendance}
+                      onChange={(e) => setAttendance(e.target.value)}
+                    />
+                  </div>
+                  <div className="pt-3">
+                    <input
+                      placeholder="Marks"
+                      className="form-control"
+                      value={marks}
+                      onChange={(e) => setMarks(e.target.value)}
+                    />
+                  </div>
+                </>
+              )}
             </div>
             <button
               type="submit"
               onClick={submitHandler}
               className="btn btn-info my-3">
-              Add
+              {student ? "Update" : "App"}
             </button>
           </div>
         </form>

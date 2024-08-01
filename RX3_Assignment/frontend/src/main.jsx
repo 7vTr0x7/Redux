@@ -7,6 +7,7 @@ import { Provider } from "react-redux";
 import store from "./app/store.js";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import StudentForm from "./components/StudentForm.jsx";
+import StudentDetails from "./components/StudentDetails";
 
 const router = createBrowserRouter([
   {
@@ -16,6 +17,10 @@ const router = createBrowserRouter([
   {
     path: "/studentForm",
     element: <StudentForm />,
+  },
+  {
+    path: "/:studentId",
+    element: <StudentDetails />,
   },
 ]);
 
