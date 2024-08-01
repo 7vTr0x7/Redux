@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchStudents } from "./studentsSlice";
-import StudentList from "./StudentList";
+import StudentList from "../../components/StudentList";
 
 const StudentView = () => {
   const dispatch = useDispatch();
@@ -18,7 +18,7 @@ const StudentView = () => {
       {status === "pending" && <p>Loading...</p>}
       {error && <p>Error: {error}</p>}
       <h1>Student View</h1>
-      <button className="btn btn-warning">Add Student</button>
+      <button className="btn btn-warning my-3">Add Student</button>
       <StudentList students={students.students} />
     </div>
   );
