@@ -14,10 +14,11 @@ const StudentView = () => {
   }, []);
 
   return (
-    <div>
+    <div className="container py-3">
       {status === "pending" && <p>Loading...</p>}
       {error && <p>Error: {error}</p>}
       <h1>Student View</h1>
+      <button className="btn btn-warning">Add Student</button>
       <StudentList students={students.students} />
     </div>
   );
