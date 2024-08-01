@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import Header from "./Header";
+import { useDispatch, useSelector } from "react-redux";
+import { addStudentAsync } from "../features/students/studentsSlice";
 
 const StudentForm = () => {
   const [name, setName] = useState("");
@@ -7,15 +9,25 @@ const StudentForm = () => {
   const [grade, setGrade] = useState("");
   const [gender, setGender] = useState("");
 
+  const dispatch = useDispatch();
+  const students = useSelector((state) => state.students);
+
   const submitHandler = (e) => {
     e.preventDefault();
 
     const newStudent = {
       name: name,
-      age: age,
+      age: Number(age),
       grade: grade,
       gender: gender,
     };
+
+    dispatch(addStudentAsync(newStudent));
+
+    setAge("");
+    setName("");
+    setGender("");
+    setGrade("");
   };
 
   return (

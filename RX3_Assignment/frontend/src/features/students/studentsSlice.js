@@ -6,6 +6,18 @@ export const fetchStudents = createAsyncThunk("fetchStudents", async () => {
   return res.data;
 });
 
+export const addStudentAsync = createAsyncThunk(
+  "students/addStudentAsync",
+  async (student) => {
+    const res = await axios.post("http://localhost:4000/students", student, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    return res.data;
+  }
+);
+
 export const studentsSlice = createSlice({
   name: "students",
   initialState: {
@@ -13,14 +25,7 @@ export const studentsSlice = createSlice({
     status: "idle",
     error: null,
   },
-  reducers: {
-    addStudentAsync: (state, action) => {
-      return {
-        ...state,
-        students: [...state.students, action.payload],
-      };
-    },
-  },
+  reducers: {},
   extraReducers: (builder) => {
     builder.addCase(fetchStudents.pending, (state) => {
       state.status = "Loading";
@@ -35,5 +40,3 @@ export const studentsSlice = createSlice({
     });
   },
 });
-
-export const { addStudentAsync } = studentsSlice.actions;
