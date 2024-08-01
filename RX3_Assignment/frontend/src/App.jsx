@@ -1,11 +1,13 @@
 import React from "react";
 import StudentView from "./features/students/StudentView";
+import Header from "./components/Header";
 
 const App = () => {
   return (
-    <div>
+    <>
+      <Header />
       <StudentView />
-    </div>
+    </>
   );
 };
 
