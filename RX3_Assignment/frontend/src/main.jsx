@@ -5,11 +5,24 @@ import "bootstrap/dist/js/bootstrap.bundle.js";
 import App from "./App.jsx";
 import { Provider } from "react-redux";
 import store from "./app/store.js";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import StudentForm from "./components/StudentForm.jsx";
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <App />,
+  },
+  {
+    path: "/studentForm",
+    element: <StudentForm />,
+  },
+]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <Provider store={store}>
-      <App />
+      <RouterProvider router={router} />
     </Provider>
   </React.StrictMode>
 );
