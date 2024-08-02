@@ -21,8 +21,6 @@ export const addStudentAsync = createAsyncThunk(
 export const updateStudentAsync = createAsyncThunk(
   "students/updateStudentAsync",
   async (data) => {
-    console.log(data.id);
-    console.log(data.newStudent);
     const res = await axios.put(
       `http://localhost:4000/students/${data.id}`,
       data.newStudent,
@@ -51,14 +49,7 @@ export const studentsSlice = createSlice({
     status: "idle",
     error: null,
   },
-  reducers: {
-    addStudent: (state, action) => {
-      return {
-        ...state,
-        students: [...state.students, action.payload],
-      };
-    },
-  },
+  reducers: {},
   extraReducers: (builder) => {
     builder.addCase(fetchStudents.pending, (state) => {
       state.status = "Loading";
@@ -84,5 +75,3 @@ export const studentsSlice = createSlice({
     });
   },
 });
-
-export const { addStudent } = studentsSlice.actions;

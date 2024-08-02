@@ -5,7 +5,6 @@ const StudentList = ({ students }) => {
   return (
     <div>
       <h2>Student List</h2>
-
       <ul>
         {students.length > 0 &&
           students.map((student) => (

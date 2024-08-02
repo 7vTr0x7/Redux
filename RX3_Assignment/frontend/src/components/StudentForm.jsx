@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
 import {
-  addStudent,
+  addStudentAsync,
+  fetchStudents,
   updateStudentAsync,
 } from "../features/students/studentsSlice";
 import Header from "./Header";
@@ -21,36 +22,36 @@ const StudentForm = () => {
 
   const { student } = location.state || {};
 
-  const students = useSelector((state) => state.students);
-
   const dispatch = useDispatch();
 
   const submitHandler = (e) => {
     e.preventDefault();
 
     if (student) {
-      const newStudent = {
-        _id: students.length + 1,
-        name: name,
-        age: Number(age),
-        grade: grade,
-        gender: gender,
-        attendance: Number(attendance),
-        marks: Number(marks),
-      };
-      dispatch(updateStudentAsync({ id: student._id, newStudent }));
+      if ((name, age, gender, grade, attendance, marks)) {
+        const newStudent = {
+          _id: student._id,
+          name: name,
+          age: Number(age),
+          grade: grade,
+          gender: gender,
+          attendance: Number(attendance),
+          marks: Number(marks),
+        };
+        dispatch(updateStudentAsync({ id: student._id, newStudent }));
+      }
     } else {
-      const newStudent = {
-        _id: students.length + 1,
-        name: name,
-        age: Number(age),
-        grade: grade,
-        gender: gender,
-      };
+      if ((name, age, gender, grade)) {
+        const newStudent = {
+          name: name,
+          age: Number(age),
+          grade: grade,
+          gender: gender,
+        };
 
-      dispatch(addStudent(newStudent));
+        dispatch(addStudentAsync(newStudent));
+      }
     }
-
     setAge("");
     setName("");
     setGender("");
