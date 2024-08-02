@@ -152,7 +152,9 @@ const StudentForm = () => {
             <button
               type="submit"
               onClick={submitHandler}
-              className="btn btn-info my-3">
+              className={
+                student ? "btn btn-primary my-3" : "btn btn-info my-3"
+              }>
               {student ? "Update" : "Add"}
             </button>
             <p>
