@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
 import {
-  addStudentAsync,
+  addStudent,
   updateStudentAsync,
 } from "../features/students/studentsSlice";
 import Header from "./Header";
@@ -21,6 +21,8 @@ const StudentForm = () => {
 
   const { student } = location.state || {};
 
+  const students = useSelector((state) => state.students);
+
   const dispatch = useDispatch();
 
   const submitHandler = (e) => {
@@ -28,6 +30,7 @@ const StudentForm = () => {
 
     if (student) {
       const newStudent = {
+        _id: students.length + 1,
         name: name,
         age: Number(age),
         grade: grade,
@@ -38,13 +41,14 @@ const StudentForm = () => {
       dispatch(updateStudentAsync({ id: student._id, newStudent }));
     } else {
       const newStudent = {
+        _id: students.length + 1,
         name: name,
         age: Number(age),
         grade: grade,
         gender: gender,
       };
 
-      dispatch(addStudentAsync(newStudent));
+      dispatch(addStudent(newStudent));
     }
 
     setAge("");

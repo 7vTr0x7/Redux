@@ -51,7 +51,14 @@ export const studentsSlice = createSlice({
     status: "idle",
     error: null,
   },
-  reducers: {},
+  reducers: {
+    addStudent: (state, action) => {
+      return {
+        ...state,
+        students: [...state.students, action.payload],
+      };
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(fetchStudents.pending, (state) => {
       state.status = "Loading";
@@ -77,3 +84,5 @@ export const studentsSlice = createSlice({
     });
   },
 });
+
+export const { addStudent } = studentsSlice.actions;
