@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Header from "../../components/Header";
 import { useDispatch, useSelector } from "react-redux";
-import { addTeacher } from "./teachersSlice";
+import { addTeacher, updateTeacher } from "./teachersSlice";
+import { useLocation } from "react-router-dom";
 
 const TeacherForm = () => {
   const [name, setName] = useState("");
@@ -12,20 +13,33 @@ const TeacherForm = () => {
 
   const teachers = useSelector((state) => state.teachers.teachers);
 
+  const location = useLocation();
   const dispatch = useDispatch();
 
+  const data = location.state || {};
   const clickHandler = (e) => {
     e.preventDefault();
     if (name && age && gender && subject) {
-      const newTeacher = {
-        _id: teachers.length + 1,
-        name: name,
-        age: age,
-        gender: gender,
-        subject: subject,
-      };
+      if (data) {
+        const teacher = {
+          _id: data.teacher._id,
+          name: name,
+          age: age,
+          gender: gender,
+          subject: subject,
+        };
 
-      dispatch(addTeacher(newTeacher));
+        dispatch(updateTeacher(data.teacher._id, teacher));
+      } else {
+        const newTeacher = {
+          _id: teachers.length + 1,
+          name: name,
+          age: age,
+          gender: gender,
+          subject: subject,
+        };
+        dispatch(addTeacher(newTeacher));
+      }
       setAge("");
       setName("");
       setGender("");
@@ -34,6 +48,14 @@ const TeacherForm = () => {
     }
   };
 
+  useEffect(() => {
+    if (data) {
+      setName(data.teacher?.name);
+      setAge(data.teacher?.age);
+      setGender(data.teacher?.gender);
+      setSubject(data.teacher?.subject);
+    }
+  }, []);
   return (
     <>
       <Header />
@@ -104,7 +126,7 @@ const TeacherForm = () => {
               className="btn btn-primary my-3"
               type="submit"
               onClick={clickHandler}>
-              Add Teacher
+              {data ? "Update Teacher" : "Add Teacher"}
             </button>
           </form>
         </div>

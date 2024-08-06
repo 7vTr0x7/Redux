@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import Header from "../../components/Header";
 import { deleteTeacher } from "./teachersSlice";
 
@@ -32,7 +32,14 @@ const TeacherDetails = () => {
             <p>gender: {teacher?.gender}</p>
             <p>Subject: {teacher?.subject}</p>
             <div>
-              <button className="btn btn-warning ">Edit Details</button>
+              <button className="btn btn-warning ">
+                <Link
+                  to="/teacherForm"
+                  className="nav-link"
+                  state={{ teacher }}>
+                  Edit Details
+                </Link>
+              </button>
               <button className="btn btn-danger mx-3" onClick={deleteHandler}>
                 Delete
               </button>
