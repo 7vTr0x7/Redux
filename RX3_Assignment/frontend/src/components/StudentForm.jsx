@@ -20,6 +20,12 @@ const StudentForm = () => {
 
   const location = useLocation();
 
+  const students = useSelector((state) => state.students);
+
+  useEffect(() => {
+    dispatch(fetchStudents());
+  }, []);
+
   const { student } = location.state || {};
 
   const dispatch = useDispatch();
@@ -43,6 +49,7 @@ const StudentForm = () => {
     } else {
       if ((name, age, gender, grade)) {
         const newStudent = {
+          _id: students.students.length + 1,
           name: name,
           age: Number(age),
           grade: grade,
@@ -67,6 +74,10 @@ const StudentForm = () => {
       setAge(student.age);
       setGender(student.gender);
       setGrade(student.grade);
+      if (student.attendance && student.marks) {
+        setAttendance(student.attendance);
+        setMarks(student.marks);
+      }
     }
   }, []);
 
@@ -105,14 +116,13 @@ const StudentForm = () => {
               />
             </div>
             <div className="pt-3">
-              <label>Gender: </label>
-              <br />
               <label htmlFor="Male">
                 <input
                   type="radio"
                   name="gender"
                   value="Male"
                   id="Male"
+                  checked={gender === "Male"}
                   onChange={(e) => setGender(e.target.value)}
                 />
                 {" Male"}
@@ -124,6 +134,7 @@ const StudentForm = () => {
                   name="gender"
                   value="Female"
                   id="Female"
+                  checked={gender === "Female"}
                   onChange={(e) => setGender(e.target.value)}
                 />
                 {" Female"}
