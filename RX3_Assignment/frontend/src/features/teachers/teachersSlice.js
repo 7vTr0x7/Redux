@@ -30,8 +30,9 @@ export const teachersSlice = createSlice({
     },
     updateTeacher: (state, action) => {
       const teacherIndex = state.teachers.findIndex(
-        (teacher) => teacher._id === action.payload.id
+        (teacher) => teacher._id == action.payload.id
       );
+      console.log(teacherIndex);
       state.teachers[teacherIndex] = action.payload.teacher;
     },
   },

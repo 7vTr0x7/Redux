@@ -48,8 +48,6 @@ const SchoolView = () => {
     dispatch(setTopStudent(topStudent));
   }, []);
 
-  console.log(stats);
-
   return (
     <>
       <Header />

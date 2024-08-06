@@ -29,7 +29,7 @@ const TeacherForm = () => {
           subject: subject,
         };
 
-        dispatch(updateTeacher(data.teacher._id, teacher));
+        dispatch(updateTeacher({ id: data.teacher._id, teacher }));
       } else {
         const newTeacher = {
           _id: teachers.length + 1,
@@ -130,7 +130,7 @@ const TeacherForm = () => {
             </button>
           </form>
         </div>
-        {submitted && <p>Teacher Added</p>}
+        {submitted && <p>{`${data ? "Teacher Updated" : "Teacher Added"}`}</p>}
       </main>
     </>
   );
