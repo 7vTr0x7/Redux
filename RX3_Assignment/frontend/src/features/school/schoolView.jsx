@@ -9,6 +9,7 @@ const SchoolView = () => {
   const students = useSelector((state) => state.students);
 
   const stats = useSelector((state) => state.school.stats);
+  const teachers = useSelector((state) => state.teachers.teachers);
 
   useEffect(() => {
     dispatch(fetchStudents());
@@ -30,27 +31,38 @@ const SchoolView = () => {
       acc.mark > curr.marks ? acc : curr
     );
 
+    const totalTeachers = teachers.length;
+    const subjects = teachers.map((teacher) => teacher.subject);
+
     dispatch(
       updateSchoolStats({
         totalStudents,
         averageAttendance,
         averageMarks,
         topStudent,
+        totalTeachers,
+        subjects,
       })
     );
 
     dispatch(setTopStudent(topStudent));
   }, []);
 
+  console.log(stats);
+
   return (
     <>
       <Header />
       <main className="container py-4">
         <h1>School View</h1>
+        <h2>Students</h2>
         <p>Total Students: {stats.totalStudents}</p>
         <p>Average Attendance: {stats.averageAttendance}</p>
         <p>Average Marks: {stats.averageMarks}</p>
         <p>Top Student: {stats.topStudent?.name}</p>
+        <h2>Teachers</h2>
+        <p>Total Teachers: {stats?.totalTeachers}</p>
+        <p>Subjects: {stats?.subjects?.join(", ")}</p>
       </main>
     </>
   );
