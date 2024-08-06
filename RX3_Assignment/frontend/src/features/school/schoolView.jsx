@@ -16,37 +16,39 @@ const SchoolView = () => {
   }, []);
 
   useEffect(() => {
-    const totalStudents = students.students.length;
-    const totalAttendance = students.students.reduce(
-      (acc, curr) => acc + (curr.attendance || 0),
-      0
-    );
-    const averageAttendance = totalAttendance / totalStudents;
-    const totalMarks = students.students.reduce(
-      (acc, curr) => acc + (curr.marks || 0),
-      0
-    );
-    const averageMarks = totalMarks / totalStudents;
-    const topStudent = students.students.reduce((acc, curr) =>
-      acc.mark > curr.marks ? acc : curr
-    );
+    if (students.students && students.students.length > 0) {
+      const totalStudents = students.students.length;
+      const totalAttendance = students.students.reduce(
+        (acc, curr) => acc + (curr.attendance || 0),
+        0
+      );
+      const averageAttendance = totalAttendance / totalStudents;
+      const totalMarks = students.students.reduce(
+        (acc, curr) => acc + (curr.marks || 0),
+        0
+      );
+      const averageMarks = totalMarks / totalStudents;
+      const topStudent = students.students.reduce((acc, curr) =>
+        acc.mark > curr.marks ? acc : curr
+      );
 
-    const totalTeachers = teachers.length;
-    const subjects = teachers.map((teacher) => teacher.subject);
+      const totalTeachers = teachers.length;
+      const subjects = teachers.map((teacher) => teacher.subject);
 
-    dispatch(
-      updateSchoolStats({
-        totalStudents,
-        averageAttendance,
-        averageMarks,
-        topStudent,
-        totalTeachers,
-        subjects,
-      })
-    );
+      dispatch(
+        updateSchoolStats({
+          totalStudents,
+          averageAttendance,
+          averageMarks,
+          topStudent,
+          totalTeachers,
+          subjects,
+        })
+      );
 
-    dispatch(setTopStudent(topStudent));
-  }, []);
+      dispatch(setTopStudent(topStudent));
+    }
+  }, [students.students]);
 
   return (
     <>
@@ -54,13 +56,17 @@ const SchoolView = () => {
       <main className="container py-4">
         <h1>School View</h1>
         <h2>Students</h2>
-        <p>Total Students: {stats.totalStudents}</p>
-        <p>Average Attendance: {stats.averageAttendance}</p>
-        <p>Average Marks: {stats.averageMarks}</p>
-        <p>Top Student: {stats.topStudent?.name}</p>
-        <h2>Teachers</h2>
-        <p>Total Teachers: {stats?.totalTeachers}</p>
-        <p>Subjects: {stats?.subjects?.join(", ")}</p>
+        {stats && (
+          <>
+            <p>Total Students: {stats.totalStudents}</p>
+            <p>Average Attendance: {stats.averageAttendance}</p>
+            <p>Average Marks: {stats.averageMarks}</p>
+            <p>Top Student: {stats.topStudent?.name}</p>
+            <h2>Teachers</h2>
+            <p>Total Teachers: {stats?.totalTeachers}</p>
+            <p>Subjects: {stats?.subjects?.join(", ")}</p>
+          </>
+        )}
       </main>
     </>
   );

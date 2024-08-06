@@ -50,13 +50,13 @@ const TeacherForm = () => {
   };
 
   useEffect(() => {
-    if (data) {
+    if (data.teacher) {
       setName(data.teacher?.name);
       setAge(data.teacher?.age);
       setGender(data.teacher?.gender);
       setSubject(data.teacher?.subject);
     }
-  }, []);
+  }, [data.teacher]);
 
   return (
     <>
