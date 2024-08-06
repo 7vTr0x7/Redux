@@ -7,6 +7,6 @@ export default configureStore({
   reducer: {
     students: studentsSlice.reducer,
     school: schoolSlice.reducer,
-    teacher: teachersSlice.reducer,
+    teachers: teachersSlice.reducer,
   },
 });
