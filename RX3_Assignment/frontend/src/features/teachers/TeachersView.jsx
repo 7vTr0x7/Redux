@@ -1,7 +1,15 @@
 import React from "react";
+import Header from "../../components/Header";
 
 const TeachersView = () => {
-  return <div></div>;
+  return (
+    <>
+      <Header />
+      <main className="container py-4">
+        <h1>Teacher View</h1>
+      </main>
+    </>
+  );
 };
 
 export default TeachersView;
