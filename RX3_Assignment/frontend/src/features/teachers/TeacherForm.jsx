@@ -17,10 +17,11 @@ const TeacherForm = () => {
   const dispatch = useDispatch();
 
   const data = location.state || {};
+
   const clickHandler = (e) => {
     e.preventDefault();
     if (name && age && gender && subject) {
-      if (data) {
+      if (data.teacher) {
         const teacher = {
           _id: data.teacher._id,
           name: name,
@@ -56,6 +57,7 @@ const TeacherForm = () => {
       setSubject(data.teacher?.subject);
     }
   }, []);
+
   return (
     <>
       <Header />
@@ -126,11 +128,13 @@ const TeacherForm = () => {
               className="btn btn-primary my-3"
               type="submit"
               onClick={clickHandler}>
-              {data ? "Update Teacher" : "Add Teacher"}
+              {data.teacher ? "Update Teacher" : "Add Teacher"}
             </button>
           </form>
         </div>
-        {submitted && <p>{`${data ? "Teacher Updated" : "Teacher Added"}`}</p>}
+        {submitted && (
+          <p>{`${data.teacher ? "Teacher Updated" : "Teacher Added"}`}</p>
+        )}
       </main>
     </>
   );
