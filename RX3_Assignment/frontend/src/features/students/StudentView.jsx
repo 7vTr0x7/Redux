@@ -9,7 +9,6 @@ const StudentView = () => {
   const students = useSelector((state) => state.students);
   const status = useSelector((state) => state.status);
   const error = useSelector((state) => state.error);
-  console.log(students);
 
   useEffect(() => {
     dispatch(fetchStudents());

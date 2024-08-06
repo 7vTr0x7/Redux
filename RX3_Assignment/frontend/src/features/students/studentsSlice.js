@@ -38,13 +38,13 @@ export const fetchStudents = createAsyncThunk("fetchStudents", async () => {
 //   }
 // );
 
-export const deleteStudentAsync = createAsyncThunk(
-  "deleteStudent",
-  async (id) => {
-    const res = await axios.delete(`http://localhost:4000/students/${id}`);
-    return await res.data;
-  }
-);
+// export const deleteStudentAsync = createAsyncThunk(
+//   "deleteStudent",
+//   async (id) => {
+//     const res = await axios.delete(`http://localhost:4000/students/${id}`);
+//     return await res.data;
+//   }
+// );
 
 export const studentsSlice = createSlice({
   name: "students",
@@ -69,10 +69,22 @@ export const studentsSlice = createSlice({
 
       state.students[index] = action.payload.newStudent;
     },
+    deleteStudentAsync: (state, action) => {
+      return {
+        ...state,
+        students: state.students.filter((stud) => stud._id !== action.payload),
+      };
+    },
     setFilter: (state, action) => {
       return {
         ...state,
         filter: action.payload,
+      };
+    },
+    setSortBy: (state, action) => {
+      return {
+        ...state,
+        sortBy: action.payload,
       };
     },
   },
@@ -97,5 +109,10 @@ export const studentsSlice = createSlice({
   },
 });
 
-export const { setFilter, addStudentAsync, updateStudentAsync } =
-  studentsSlice.actions;
+export const {
+  setFilter,
+  addStudentAsync,
+  updateStudentAsync,
+  deleteStudentAsync,
+  setSortBy,
+} = studentsSlice.actions;

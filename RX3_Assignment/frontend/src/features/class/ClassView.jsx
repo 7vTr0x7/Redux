@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Header from "../../components/Header";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchStudents, setFilter } from "../students/studentsSlice";
+import { fetchStudents, setFilter, setSortBy } from "../students/studentsSlice";
 
 const ClassView = () => {
   const [filteredStudents, setFilteredStudents] = useState([]);
@@ -11,25 +11,57 @@ const ClassView = () => {
   const filter = useSelector((state) => {
     return state.students.filter;
   });
-  console.log(students);
+  const sortBy = useSelector((state) => {
+    return state.students.sortBy;
+  });
 
   const getFiltered = () => {
-    console.log(students);
-    if (filter.filter !== "All") {
-      const filtered =
-        filter.filter === "Boys"
-          ? students.students.filter((student) => student.gender === "Male")
-          : students.students.filter((student) => student.gender === "Female");
+    if (filter !== "All") {
+      if (filter === "Boys") {
+        const filtered = students.students.filter(
+          (student) => student.gender === "Male"
+        );
+        setFilteredStudents(filtered);
+      } else {
+        const filtered = students.students.filter(
+          (student) => student.gender === "Female"
+        );
 
-      setFilteredStudents(filtered);
+        setFilteredStudents(filtered);
+      }
     } else {
       setFilteredStudents(students.students);
     }
   };
 
-  const handleFilterByGender = (e) => {
+  const handleFilterChange = (e) => {
     dispatch(setFilter(e.target.value));
   };
+
+  const handleSortChange = (e) => {
+    dispatch(setSortBy(e.target.value));
+  };
+
+  const getSorted = () => {
+    if (sortBy === "name") {
+      const sort = [...filteredStudents].sort((a, b) =>
+        a.name.localeCompare(b.name)
+      );
+      setFilteredStudents(sort);
+    } else if (sortBy === "marks") {
+      const sort = [...filteredStudents].sort((a, b) => b.marks - a.marks);
+      setFilteredStudents(sort);
+    } else if (sortBy === "attendance") {
+      const sort = [...filteredStudents].sort(
+        (a, b) => b.attendance - a.attendance
+      );
+      setFilteredStudents(sort);
+    }
+  };
+
+  useEffect(() => {
+    getSorted();
+  }, [sortBy]);
 
   useEffect(() => {
     getFiltered();
@@ -50,7 +82,7 @@ const ClassView = () => {
             id="filterByGender"
             className="form-select"
             value={filter.filter}
-            onChange={handleFilterByGender}>
+            onChange={handleFilterChange}>
             <option value="All">All</option>
             <option value="Boys">Boys</option>
             <option value="Girls">Girls</option>
@@ -59,7 +91,10 @@ const ClassView = () => {
 
         <div className="col-md-2 my-3">
           <label htmlFor="sortBy">Sort By: </label>
-          <select id="sortBy" className="form-select">
+          <select
+            id="sortBy"
+            className="form-select"
+            onChange={handleSortChange}>
             <option value="name">Name</option>
             <option value="marks">Marks</option>
             <option value="attendance">Attendance</option>
@@ -70,7 +105,11 @@ const ClassView = () => {
           <ul>
             {filteredStudents &&
               filteredStudents.map((student) => (
-                <li key={student._id}>{student.name}</li>
+                <li key={student._id}>{`${student.name} - ${
+                  student.gender
+                } - Marks: ${student.marks || "Unknown"} - Attendance: ${
+                  student.attendance || "Unknown"
+                }`}</li>
               ))}
           </ul>
         </div>
