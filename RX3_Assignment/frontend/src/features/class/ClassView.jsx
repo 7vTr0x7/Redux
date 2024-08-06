@@ -83,7 +83,7 @@ const ClassView = () => {
           <select
             id="filterByGender"
             className="form-select"
-            value={filter.filter}
+            value={filter}
             onChange={handleFilterChange}>
             <option value="All">All</option>
             <option value="Boys">Boys</option>
@@ -96,6 +96,7 @@ const ClassView = () => {
           <select
             id="sortBy"
             className="form-select"
+            value={sortBy}
             onChange={handleSortChange}>
             <option value="name">Name</option>
             <option value="marks">Marks</option>
