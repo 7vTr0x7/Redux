@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Header from "../../components/Header";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addTeacher } from "./teachersSlice";
 
 const TeacherForm = () => {
@@ -8,6 +8,9 @@ const TeacherForm = () => {
   const [age, setAge] = useState("");
   const [gender, setGender] = useState("");
   const [subject, setSubject] = useState("");
+  const [submitted, setSubmitted] = useState(false);
+
+  const teachers = useSelector((state) => state.teachers.teachers);
 
   const dispatch = useDispatch();
 
@@ -15,6 +18,7 @@ const TeacherForm = () => {
     e.preventDefault();
     if (name && age && gender && subject) {
       const newTeacher = {
+        _id: teachers.length + 1,
         name: name,
         age: age,
         gender: gender,
@@ -22,6 +26,11 @@ const TeacherForm = () => {
       };
 
       dispatch(addTeacher(newTeacher));
+      setAge("");
+      setName("");
+      setGender("");
+      setSubject("");
+      setSubmitted(true);
     }
   };
 
@@ -53,6 +62,7 @@ const TeacherForm = () => {
               />
             </div>
             <div className="mt-3">
+              <p className="p-0 m-0">Gender:</p>
               <label htmlFor="male">
                 <input
                   type="radio"
@@ -98,6 +108,7 @@ const TeacherForm = () => {
             </button>
           </form>
         </div>
+        {submitted && <p>Teacher Added</p>}
       </main>
     </>
   );
