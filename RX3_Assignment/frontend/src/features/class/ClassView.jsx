@@ -6,6 +6,8 @@ import { fetchStudents, setFilter, setSortBy } from "../students/studentsSlice";
 const ClassView = () => {
   const [filteredStudents, setFilteredStudents] = useState([]);
 
+  const [sortedStudents, setSortedStudents] = useState([]);
+
   const dispatch = useDispatch();
   const students = useSelector((state) => state.students);
   const filter = useSelector((state) => {
@@ -47,15 +49,15 @@ const ClassView = () => {
       const sort = [...filteredStudents].sort((a, b) =>
         a.name.localeCompare(b.name)
       );
-      setFilteredStudents(sort);
+      setSortedStudents(sort);
     } else if (sortBy === "marks") {
       const sort = [...filteredStudents].sort((a, b) => b.marks - a.marks);
-      setFilteredStudents(sort);
+      setSortedStudents(sort);
     } else if (sortBy === "attendance") {
       const sort = [...filteredStudents].sort(
         (a, b) => b.attendance - a.attendance
       );
-      setFilteredStudents(sort);
+      setSortedStudents(sort);
     }
   };
 
@@ -103,8 +105,8 @@ const ClassView = () => {
 
         <div className="my-3">
           <ul>
-            {filteredStudents &&
-              filteredStudents.map((student) => (
+            {sortedStudents &&
+              sortedStudents.map((student) => (
                 <li key={student._id}>{`${student.name} - ${
                   student.gender
                 } - Marks: ${student.marks || "Unknown"} - Attendance: ${
