@@ -12,8 +12,8 @@ const TeachersView = () => {
       <main className="container py-4">
         <h1>Teacher View </h1>
         <button className="btn btn-warning my-3">
-          <Link to="/" className="nav-link">
-            Add Student
+          <Link to="/teacherForm" className="nav-link">
+            Add Teacher
           </Link>
         </button>
         <TeachersList teachers={teachers} />

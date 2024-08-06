@@ -116,6 +116,7 @@ const StudentForm = () => {
               />
             </div>
             <div className="pt-3">
+              <p className="p-0 m-0">Gender:</p>
               <label htmlFor="Male">
                 <input
                   type="radio"
