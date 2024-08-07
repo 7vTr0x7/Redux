@@ -72,7 +72,7 @@ const StudentForm = () => {
     if (student) {
       setName(student.name);
       setAge(student.age);
-      setGender(student.gender);
+      setGender(student?.gender);
       setGrade(student.grade);
       if (student.attendance && student.marks) {
         setAttendance(student.attendance);
@@ -121,9 +121,9 @@ const StudentForm = () => {
                 <input
                   type="radio"
                   name="gender"
-                  value="Male"
+                  value={"Male"}
                   id="Male"
-                  checked={gender === "Male"}
+                  checked={gender === "male"}
                   onChange={(e) => setGender(e.target.value)}
                 />
                 {" Male"}
@@ -133,9 +133,9 @@ const StudentForm = () => {
                 <input
                   type="radio"
                   name="gender"
-                  value="Female"
+                  value={"Female"}
                   id="Female"
-                  checked={gender === "Female"}
+                  checked={gender === "female"}
                   onChange={(e) => setGender(e.target.value)}
                 />
                 {" Female"}
