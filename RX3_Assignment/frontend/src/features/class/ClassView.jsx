@@ -4,10 +4,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchStudents, setFilter, setSortBy } from "../students/studentsSlice";
 
 const ClassView = () => {
-  const [filteredStudents, setFilteredStudents] = useState([]);
-
-  const [sortedStudents, setSortedStudents] = useState([]);
-
   const dispatch = useDispatch();
   const students = useSelector((state) => state.students);
   const filter = useSelector((state) => {
@@ -17,24 +13,12 @@ const ClassView = () => {
     return state.students.sortBy;
   });
 
-  const getFiltered = () => {
-    if (filter !== "All") {
-      if (filter === "Boys") {
-        const filtered = students.students.filter(
-          (student) => student.gender === "Male"
-        );
-        setFilteredStudents(filtered);
-      } else {
-        const filtered = students.students.filter(
-          (student) => student.gender === "Female"
-        );
-
-        setFilteredStudents(filtered);
-      }
-    } else {
-      setFilteredStudents(students.students);
-    }
-  };
+  const filteredStudents =
+    filter !== "All"
+      ? filter === "Boys"
+        ? students.students.filter((stud) => stud.gender === "Male")
+        : students.students.filter((stud) => stud.gender === "Female")
+      : students.students;
 
   const handleFilterChange = (e) => {
     dispatch(setFilter(e.target.value));
@@ -44,30 +28,24 @@ const ClassView = () => {
     dispatch(setSortBy(e.target.value));
   };
 
-  const getSorted = () => {
-    if (sortBy === "name") {
+  const getSorted = (sort) => {
+    if (sort === "name") {
       const sort = [...filteredStudents].sort((a, b) =>
         a.name.localeCompare(b.name)
       );
-      setSortedStudents(sort);
-    } else if (sortBy === "marks") {
+      return sort;
+    } else if (sort === "marks") {
       const sort = [...filteredStudents].sort((a, b) => b.marks - a.marks);
-      setSortedStudents(sort);
-    } else if (sortBy === "attendance") {
+      return sort;
+    } else if (sort === "attendance") {
       const sort = [...filteredStudents].sort(
         (a, b) => b.attendance - a.attendance
       );
-      setSortedStudents(sort);
+      return sort;
     }
   };
 
-  useEffect(() => {
-    getSorted();
-  }, [sortBy]);
-
-  useEffect(() => {
-    getFiltered();
-  }, [filter]);
+  const sortedStudents = getSorted(sortBy);
 
   useEffect(() => {
     dispatch(fetchStudents());

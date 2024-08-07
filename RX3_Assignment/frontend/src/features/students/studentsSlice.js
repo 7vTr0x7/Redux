@@ -6,46 +6,6 @@ export const fetchStudents = createAsyncThunk("fetchStudents", async () => {
   return res.data;
 });
 
-// export const addStudentAsync = createAsyncThunk(
-//   "students/addStudentAsync",
-//   async (student) => {
-//     const res = await axios.post(
-//       "http://localhost:4000/students",
-//       student.newStudent,
-//       {
-//         headers: {
-//           "Content-Type": "application/json",
-//         },
-//       }
-//     );
-//     return res.data;
-//   }
-// );
-
-// export const updateStudentAsync = createAsyncThunk(
-//   "students/updateStudentAsync",
-//   async (data) => {
-//     const res = await axios.put(
-//       `http://localhost:4000/students/${data.id}`,
-//       data.newStudent,
-//       {
-//         headers: {
-//           "Content-Type": "application/json",
-//         },
-//       }
-//     );
-//     return await res.data;
-//   }
-// );
-
-// export const deleteStudentAsync = createAsyncThunk(
-//   "deleteStudent",
-//   async (id) => {
-//     const res = await axios.delete(`http://localhost:4000/students/${id}`);
-//     return await res.data;
-//   }
-// );
-
 export const studentsSlice = createSlice({
   name: "students",
   initialState: {
